@@ -1,0 +1,48 @@
+{% extends 'userpanel/user_base.html' %}
+{% load static %}
+{% block title %} EDIT PROFILE DETAILS {% endblock %}
+
+{% block content %}
+<div class="container mt-5" style="color: grey;height: 800px;">
+    <div class="row justify-content-center">
+        <div class="col-md-5">
+            <div class="card">
+                <div class="card-header text-center">
+                    <h4>Edit Profile Form</h4>
+                </div>
+                <div class="card-body">
+                  {% for message in messages %}
+                  <div class="alert alert-success">
+                      {{ message }}
+                  </div>
+                  {% endfor %}
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <fieldset>
+                            <!-- Render fields from register_form -->
+                            {% for field in register_form %}
+                            <div class="form-group">
+                                {{ field.label_tag }}
+                                {{ field }}
+                                {{ field.errors }}
+                            </div>
+                            {% endfor %}
+                        </fieldset>
+                        <fieldset>
+                            <!-- Render fields from profile_form -->
+                            {% for field in profile_form %}
+                            <div class="form-group">
+                                {{ field.label_tag }}
+                                {{ field }}
+                                {{ field.errors }}
+                            </div>
+                            {% endfor %}
+                        </fieldset>
+                        <input type="submit" value="Update & Save" class="btn btn-warning" /> <!-- Updated button color -->
+                    </form> <!-- Properly closed form tag -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends 'adminpanel/admin_base.html' %}
+{% load static %}
+{% block title %}Profile Page{% endblock %}
+
+{% block navbar %}
+{% endblock %}
+{% block content %}
+<div class="container mt-5">
+  <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-4">
+            <div class="card shadow-sm">
+                <div class="card-header text-white text-center">
+                    <h4>User Profile</h4> 
+                </div>
+                <div class="card-body" style="color: black;">
+                    <div class="text-center mb-3">
+                        <img src="{{ user.profile.profile_image.url }}" alt="Profile Picture" class="rounded-circle" style="width: 100px; height: 100px;">
+                    </div>
+                    <h5 class="text-center">{{ user.first_name }} {{ user.last_name }}</h5>
+
+                    <h6><strong>Information:</strong></h6><hr>
+                    <p>User Name: {{ user.username }}</p>
+                    <p>Phone: {{ user.profile.phone }}</p>
+                    <p>Email: {{ user.email }}</p>
+                    <p>ID: {{ user.profile.id_proof.url }}</p>
+                    <h6><strong>Additional Info:</strong></h6>
+                    <p>Status: {{ user.is_active|yesno:"Active,Inactive" }}</p>
+                </div>
+                <div class="card-footer text-center">
+                        <small style="color: grey;">
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

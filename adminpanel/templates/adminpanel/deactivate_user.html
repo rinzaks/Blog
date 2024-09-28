@@ -1,0 +1,17 @@
+{% extends 'adminpanel/admin_base.html' %}
+{% load static %}
+{% block title %} Deactivate User  {% endblock %}
+
+
+{% block content %}
+<div class="container mt-5">
+    <h3>Deactivate User</h3>
+    <p>Are you sure you want to deactivate user <strong>{{ user.username }}</strong>?</p>
+
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Yes, Deactivate</button>
+        <a href="{% url 'user_list' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+{% endblock %}

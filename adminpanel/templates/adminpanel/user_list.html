@@ -1,0 +1,58 @@
+{% extends 'adminpanel/admin_base.html' %}
+{% load static %}
+{% block title %} USERS LIST {% endblock %}
+{% block content %}
+<div class="card">
+    <h5 class="card-header">USER LIST</h5>
+    <div class="table-responsive text-nowrap">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>NAME</th>
+                    <th>PHOTO</th>
+                    <th>EMAIL</th>
+                    <th>PHONE</th>
+                    <th>MORE</th>
+                    <th>ACTION</th>
+                </tr>
+            </thead>
+            <tbody class="table-border-bottom-0">
+                {% for user in users %}
+                {% with user.profile as profile %}
+                <tr>
+                    <td>
+                        <!-- Change here to make the name a link -->
+                        <a href="{% url 'view_user' user.id %}" style="color: grey; text-decoration: none;">
+                            <strong>{{ user.first_name }} {{ user.last_name }}</strong>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <img src="{{ profile.profile_image.url }}" alt="Avatar" class="rounded-circle" style="width: 40px; height: 40px;" />
+                    </td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ profile.phone }}</td>
+                    <td>
+                        <a class="dropdown-item" href="{% url 'userblog_view' user.id %}">
+                            <i class="bx bx-info-circle me-1"></i> View User Blogs 
+                        </a>
+                    </td>
+                    <td>
+                        {% if user.is_active %}
+                            <a class="dropdown-item" href="{% url 'deactivate_user' user.id %}">
+                                <i class="bx bx-user-x me-1"></i> Deactivate User
+                            </a>
+                        {% else %}
+                            <a class="dropdown-item" href="{% url 'activate_user' user.id %}">
+                                <i class="bx bx-user-check me-1"></i> Activate User
+                            </a>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endwith %}
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

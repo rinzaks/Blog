@@ -1,0 +1,63 @@
+{% extends 'userpanel/user_base.html' %}
+{% load static %}
+{% block title %}VIEW THIS BLOG{% endblock %}
+
+{% block content %}
+<div class="row m-5">
+
+  {% if messages %}
+      <div class="alert alert-success">
+          {% for message in messages %}
+              {{ message }}
+          {% endfor %}
+      </div>
+  {% endif %}
+
+  <div class="article" style="border-top-left-radius: 2px solid brown; width: 60%; padding: 2%;">
+      <h3><strong>{{ blog.title }}</strong></h3>
+      <span><img src="{{ blog.blog_image.url }}" alt="Article Image" style="width: 500px; height: 300px;"></span><br><br>
+      <p style="display:inline-block;text-align:justify;color:black;">{{ blog.content }}</p>
+      <br>
+
+      <!-- Flex container for buttons -->
+      <div class="d-flex justify-content-start align-items-center">
+          <button class="btn btn-primary me-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample"
+                  aria-expanded="false" aria-controls="collapseExample" style="background-color: blueviolet;">
+              View Comments ({{ count }})
+          </button>
+
+          <form method="post" action="{% url 'edit_myblog' blog.id %}">
+              {% csrf_token %}
+              <button type="submit" class="btn" style="background-color: blueviolet;color:aliceblue">Edit</button>
+          </form>
+      </div>
+
+      <div class="collapse" id="collapseExample">
+          <div class="d-grid d-sm-flex p-3 border">
+              {% for comment in comments %}
+              
+                  <div class="mb-2">
+                      <span><p class="fw-bold d-inline" style="color: brown;">{{ comment.comment }}</p></span>
+                      <span class="text-muted ms-1">by: {{ comment.author.username }}</span>
+                      <form action="{% url 'delete_comment' comment.id %}" method="post" style="display: inline;">
+                          {% csrf_token %}
+                          <input type="submit" class="btn btn-danger btn-sm ms-2" value="Delete">
+                      </form><br>
+                  </div>
+              {% endfor %}
+          </div>
+      </div>
+
+      <div class="actions">
+          <div class="comment-form">
+              <h3>Post a Comment</h3>
+              <form method="post">
+                  {% csrf_token %}
+                  {{ form.as_p }}
+                  <input type="submit" class="btn btn-success" value="Post Comment">
+              </form>
+          </div>
+      </div>
+  </div>
+</div>
+{% endblock %}

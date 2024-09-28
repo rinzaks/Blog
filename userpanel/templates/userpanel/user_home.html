@@ -1,0 +1,58 @@
+{% extends 'userpanel/user_base.html' %}
+{% load static %}
+{% block title %} My BLOGS{% endblock %}
+
+{% block content %}
+<div class="content-wrapper">
+    <div class="container-xxl flex-grow-1 container-p-y">
+        <div class="row">
+            <div class="col-lg-10 mb-4 order-0">
+                <div class="card">
+                    <div class="d-flex align-items-end row">
+                        <div class="col-sm-7">
+                            <div class="card-body">
+                                <h5 style="color: brown;">Hey {{ logged_user.first_name }}{{ logged_user.last_name }}! 🎉</h5>
+                                <p class="mb-4">Welcome to SNEAT BLOGS <span class="fw-bold"></span></p>
+                                <a href="{% url 'create_blog' %}" class="btn" style="background-color: orange; color: white; padding: 5px 10px; border: none; border-radius: 3px; font-size: 14px; cursor: pointer;">
+                                    Create Blog
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-sm-5 text-center text-sm-left">
+                            <div class="card-body pb-0 px-0 px-md-4">
+                                <img
+                                    src="{% static 'img/illustrations/man-with-laptop-light.png' %}"
+                                    height="140"
+                                    alt="View Badge User"
+                                    data-app-dark-img="illustrations/man-with-laptop-dark.png"
+                                    data-app-light-img="illustrations/man-with-laptop-light.png"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% if blogs %}
+        <div class="row mb-5">
+            <div class="col-12">
+                <div class="d-flex flex-wrap justify-content-start">
+                    {% for blog in blogs %}
+                    <div class="col-12 col-md-6 col-lg-4 mt-4 mb-4"> <!-- Updated this line -->
+                        <div class="card" style="width: 100%;padding:5px;color:black"> <!-- Updated the width -->
+                            <img src="{{ blog.blog_image.url }}" class="card-img-top" alt="..." width="100%" height="250px"> <!-- Updated width -->
+                            <div class="card-body">
+                                <h5 class="card-title"><i><strong>{{ blog.title }}</strong></i></h5>
+                                <p>{{ blog.content|slice:":250" }}</p>
+                                <p class="card-text">created by {{ blog.author }} <br>{{ blog.created_at|date:"d-m-y" }}</p>
+                                <a href="{% url 'view_blog' blog.id %}" class="btn" style="background-color: brown; color: white;">View More</a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+{% endblock %}

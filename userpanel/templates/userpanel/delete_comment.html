@@ -1,0 +1,19 @@
+{% extends 'userpanel/user_base.html' %}
+{% block title %}
+Sneat Blogs | Confirm Deletion
+{% endblock %}
+{% block content %}
+<table style="border: 1px solid; margin:100px 500px">
+    <tr><td colspan="2"><label>Do you Want to delete {{ comment.blog }} ?</label></td></tr>
+    <tr>
+        <td>
+        <form method="POST">
+            {% csrf_token %}
+            <input type="submit" class="btn btn-danger" value="Delete"/>
+        </form></td>
+        <td>
+            <a href="{% url 'user_home' %}" class="btn btn-secondary">Cancel</a>
+        </td>
+    </tr>
+</table>
+{% endblock %}

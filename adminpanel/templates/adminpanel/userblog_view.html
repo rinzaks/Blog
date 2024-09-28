@@ -1,0 +1,47 @@
+{% extends 'adminpanel/admin_base.html' %}
+{% load static %}
+{% block title %} BLOGS OF A USER {% endblock %}
+
+{% block content %}
+<!-- Display blogs -->
+<!-- Display messages -->
+{% if messages %}
+    <div class="alert-container">
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}" role="alert">
+                {{ message }}
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
+
+<!-- Display blogs -->
+{% if blogs %}
+<div class="row mb-5">
+    {% for blog in blogs %}
+        <div class="col-md-4 mb-4" style="padding-top: 20px;padding-left: 20px;">
+            <div class="card" style="width: 100%; height: 100%;">
+                <img src="{{ blog.blog_image.url }}" class="card-img-top" alt="Blog Image" style="object-fit: cover; height: 250px;">
+                <div class="card-body">
+                    <h5 class="card-title" style="color: brown;"><strong><i>{{ blog.title }}</i></strong></h5>
+                    <p style="color: black;">{{ blog.content|slice:":250" }}{% if blog.content|length > 250 %}...{% endif %}</p>
+                    <p class="card-text">
+                        Created by {{ blog.author.get_full_name }} <br>
+                        {{ blog.created_at|date:"d-m-y" }}
+                    </p>
+                    <div class="d-flex justify-content-between">
+                        <!-- Change action to a specific URL if needed -->
+                        <form method="post" action="{% url 'blog_view' blog.id %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-warning">View More</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% else %}
+    <p>No blogs found for this user.</p>
+{% endif %}
+{% endblock %}

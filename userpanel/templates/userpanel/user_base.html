@@ -1,0 +1,170 @@
+{% load static %}
+<!DOCTYPE html>
+<html
+  lang="en"
+  class="light-style layout-menu-fixed"
+  dir="ltr"
+  data-theme="theme-default"
+  data-assets-path="{% static '' %}"
+  data-template="vertical-menu-template-free"
+>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+  <title>Dashboard - Analytics</title>
+  <meta name="description" content="" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="{% static 'img/favicon/favicon.ico' %}" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Core CSS -->
+  <link rel="stylesheet" href="{% static 'vendor/fonts/boxicons.css' %}" />
+  <link rel="stylesheet" href="{% static 'vendor/css/core.css' %}" />
+  <link rel="stylesheet" href="{% static 'vendor/css/theme-default.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/demo.css' %}" />
+
+  <!-- Vendors CSS -->
+  <link rel="stylesheet" href="{% static 'vendor/libs/perfect-scrollbar/perfect-scrollbar.css' %}" />
+
+  <!-- Helpers -->
+  <script src="{% static 'vendor/js/helpers.js' %}"></script>
+  <script src="{% static 'js/config.js' %}"></script>
+  <style>
+    /* Set background color for the body */
+    body {
+      background-color: #cdc5c5d4; /* Fallback color */
+      background-image: url("{% static 'img/R.jpg' %}"); /* Background image */
+      background-size: cover; /* Cover the entire page */
+      background-position: center; /* Center the image */
+      background-repeat: no-repeat; /* Do not repeat the image */
+      color: white; /* Set default font color to white */
+    }
+
+    /* Navbar styles */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem;
+      background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent background */
+    }
+
+    .navbar a {
+      color: white;
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      transition: background-color 0.3s;
+    }
+
+    .navbar a:hover {
+      background-color:  #cdc5c5d4;
+      color: black; /* Hover effect */
+    }
+
+    .navbar .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    .navbar .menu {
+      display: flex;
+      gap: 1rem;
+      position: relative;
+      align-items: center; /* Align items vertically center */
+    }
+
+    .dropdown {
+      position: relative;
+      display: flex; /* Make dropdown behave like a flex item */
+      align-items: center; /* Center align the dropdown */
+    }
+
+    .dropdown a {
+      padding: 0.5rem 1rem; /* Same padding as other links */
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      bottom: 200;
+      left: 0; /* Align dropdown to the left */
+      background-color: rgba(255, 255, 255, 0.9);
+      min-width: 160px;
+      z-index: 1;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      opacity: 0; /* Initially hidden */
+      transition: opacity 0.2s ease; /* Smooth transition */
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+      opacity: 1; /* Make it visible on hover */
+    }
+
+    .dropdown-content a {
+      color: black;
+      text-decoration: none;
+      display: block;
+    }
+
+    .dropdown-content a:hover {
+      background-color: rgba(200, 200, 200, 0.5);
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar">
+    <div class="logo">SNEAT BLOGS</div>
+    <div class="menu">
+      <a href="{% url 'user_home' %}">Home</a>
+      <a href="{% url 'my_blogs' %}">My Blogs</a>
+      <div class="dropdown">
+        <a href="{% url 'my_blogs' %}">{{ user.first_name }}</a>
+        <div class="dropdown-content">
+          <a href="{% url 'viewmy_profile' %}">View Profile</a>
+        </div>
+      </div>    
+     
+      <!-- Dropdown for Settings -->
+      <div class="dropdown">
+        <a href="#">Settings</a>
+        <div class="dropdown-content">
+          <a href="{% url 'edit_profile' user.id %}">Edit Profile</a>
+          <a href="{% url 'password_change' %}">Forgot Password</a>
+        </div>
+      </div>
+      
+      <a href="{% url 'user_logout' %}">Logout</a>
+    </div>
+  </nav>
+
+  {% block content %}
+  {% endblock %}
+  
+  <!-- Core JS -->
+  <script src="{% static 'vendor/libs/jquery/jquery.js' %}"></script>
+  <script src="{% static 'vendor/libs/popper/popper.js' %}"></script>
+  <script src="{% static 'vendor/js/bootstrap.js' %}"></script>
+  <script src="{% static 'vendor/libs/perfect-scrollbar/perfect-scrollbar.js' %}"></script>
+  <script src="{% static 'vendor/js/menu.js' %}"></script>
+
+  <!-- Vendors JS -->
+  <!-- Load only if required on this page -->
+  <!-- <script src="{% static 'vendor/libs/apex-charts/apexcharts.js' %}"></script> -->
+
+  <!-- Main JS -->
+  <script src="{% static 'js/main.js' %}"></script>
+
+  <!-- Page JS -->
+  <!-- <script src="{% static 'js/dashboards-analytics.js' %}"></script> -->
+
+  <!-- GitHub Buttons (if required) -->
+  <!-- <script async defer src="https://buttons.github.io/buttons.js"></script> -->
+</body>
+</html>

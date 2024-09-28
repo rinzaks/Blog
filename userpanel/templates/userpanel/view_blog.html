@@ -1,0 +1,67 @@
+{% extends 'userpanel/user_base.html' %}
+{% load static %}
+{% block title %}VIEW BLOG PAGE{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    {% if messages %}
+        <div class="alert alert-success">
+            {% for message in messages %}
+                {{ message }}
+            {% endfor %}
+        </div>
+    {% endif %}
+    
+    <div class="row">
+        <!-- Blog Content Column -->
+        <div class="col-md-8">
+            <div class="article" style="border-radius: 8px; padding: 2%;">
+                <h3>{{ blog.title }}</h3>
+                <span>
+                    <img src="{{ blog.blog_image.url }}" alt="Article Image" class="img-fluid" style="width: 100%; height: auto;">
+                </span>
+                <br><br>
+                <p style="text-align: justify;">{{ blog.content }}</p>
+                <p class="card-text">created by {{ blog.author }} <br>{{ blog.created_at|date:"d-m-y" }}</p>
+            </div>
+        </div>
+
+        <!-- Comments Column -->
+        <div class="col-md-4">
+            <div class="comments-section" style="border-radius: 8px; padding: 2%;">
+                <h3>Comments ({{ count }})</h3>
+                <button class="btn btn-primary me-1" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample"
+                    aria-expanded="false" aria-controls="collapseExample" style="background-color: blueviolet;">
+                    View Comments
+                </button>
+                <div class="collapse" id="collapseExample">
+                    <div class="p-3">
+                        {% for comment in comments %}
+                            <div class="mb-2">
+                                <span>
+                                    <p class="fw-bold d-inline" style="color: brown;">{{ comment.comment }}</p>
+                                </span>
+                                <span class="text-muted ms-1">by: {{ comment.author.username }}</span>
+                                <form action="{% url 'delete_comment' comment.id %}" method="post" style="display: inline;">
+                                    {% csrf_token %}
+                                    <input type="submit" class="btn btn-danger btn-sm ms-2" value="Delete">
+                                </form><br>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="comment-form mt-3">
+                    <h3>Post a Comment</h3>
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <input type="submit" class="btn btn-success" value="Post Comment">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</div>
+{% endblock %}

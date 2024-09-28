@@ -1,0 +1,34 @@
+{% extends 'adminpanel/admin_base.html' %}
+{% load static %}
+{% block title %}COMMENT PAGE{% endblock %}
+
+{% block content %}
+<div class="article" style="border-top-left-radius: 2px solid brown;width:60%;padding:2%;color:black">
+    <h3>{{ blog.title }}</h3>
+    <span><img src="{{ blog.blog_image.url }}" alt="Article Image" style="width: 500px; height: 300px;"></span><br><br>
+    <p style="display:inline-block;text-align:justify">{{ blog.content }}</p>
+    <p class="card-text">created by {{ blog.author }} <br>{{ blog.created_at|date:"d-m-y" }}</p>
+    <br>
+    <button class="btn btn-primary me-1" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample"
+            aria-expanded="false" aria-controls="collapseExample" style="background-color: blueviolet;">
+        View Comments {{ count }}
+    </button>
+    <div class="collapse" id="collapseExample">
+        <div class="d-grid d-sm-flex p-3 border">
+            {% for comment in comments %}
+            {% if comment.status != 'hide' %}
+                <div class="comment-item" style="margin-bottom: 10px;">
+                    <span>{{ comment.comment }} by {{ comment.author.username }}</span>
+                    <form method="post" action="{% url 'hide_comment' comment.id %}" style="display: inline;">
+                        {% csrf_token %}
+                        <input type="submit" class="btn btn-warning btn-sm ms-2" value="Hide Comment">
+                    </form>
+                                 
+                </div>
+            {% endif %}
+        {% endfor %}
+        
+        </div>
+    </div>
+</div>
+{% endblock %}

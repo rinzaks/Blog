@@ -1,0 +1,22 @@
+{% extends 'adminpanel/admin_base.html' %}
+{% load static %}
+{% block title %} UNAOTHORIZED {% endblock %}
+
+{% block content %}
+<div class="container-xxl container-p-y">
+    <div class="misc-wrapper">
+      <h2 class="mb-2 mx-2">Access Denied  :(</h2>
+      <a href="{% url 'home' %}" class="btn btn-primary">Back to home</a>
+      <div class="mt-3">
+        <img
+          src="{% static 'userpanel/static/access-denied_0.png' %}
+          alt="page-misc-error-light"
+          width="500"
+          class="img-fluid"
+          data-app-dark-img="illustrations/page-misc-error-dark.png"
+          data-app-light-img="illustrations/page-misc-error-light.png"
+        />
+      </div>
+    </div>
+  </div>
+{% endblock %}

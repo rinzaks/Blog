@@ -1,0 +1,38 @@
+{% extends 'adminpanel/admin_base.html' %}
+{% load static %}
+{% block title %}ADMIN LOGIN PAGE{% endblock %}
+
+{% block navbar %}
+{% endblock %}
+{% block content %}
+<div class="container mt-5">
+  <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-4">
+            <div class="card shadow-sm">
+                <div class="card-header text-white text-center">
+                    <h4>Admin Login Page</h4> 
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                        {% csrf_token %}
+                        {% for field in form %}
+                        <div class="mb-3">
+                            {{ field.label_tag }}
+                            {{ field }}
+                            {{ field.errors }}
+                        </div>
+                        {% endfor %}
+                        <button type="submit" class="btn btn-warning w-100">Login</button>
+                    </form>
+                </div>
+                <div class="card-footer text-center">
+                    <small style="color: grey;">Don't have an account? <a href="{% url 'registration' %}">Register</a></small><br>
+                    <small style="color: grey;">Return to <a href="{% url 'user_login' %}">User Login</a></small><br> 
+                  </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+{% endblock %}

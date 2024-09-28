@@ -1,0 +1,20 @@
+{% extends 'userpanel/user_base.html' %}
+{% block title %}
+SNEAT BLOGS | Delete Blog
+{% endblock %}
+
+{% block content %}
+<div class="row m-5">
+    <div class="col-1"></div>
+    <div class="col-10">
+        <div style="border: 2px solid; width: 300px; height: 200px; padding: 20px; margin: 100px;">
+            <p>Do you want to delete the blog titled "{{ blog.title }}"?</p>
+            <a href="{% url 'user_home' %}" class="btn btn-secondary">CANCEL</a>
+            <form method="post" action="{% url 'confirm_delete_blog' blog.id %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

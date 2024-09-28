@@ -1,0 +1,57 @@
+{% extends 'userpanel/user_base.html' %}
+{% load static %}
+{% block title %} Profile Details {% endblock %}
+
+{% block content %}
+<!-- Include Google Fonts link for Baguette Script -->
+<link href="https://fonts.googleapis.com/css2?family=Baguette+Script&display=swap" rel="stylesheet">
+
+<div class="container mt-5" style="color: black; font-family: 'Comic Sans MS', cursive, sans-serif;"> <!-- Change font to Comic Sans -->
+    <div class="row justify-content-center">
+        <div class="col-md-6"> <!-- Adjust column width as needed -->
+            <div class="card mb-9" style="min-height: 500px;"> <!-- Increased card height -->
+                <div class="card-header text-center">
+                    <div class="d-flex align-items-center justify-content-start"> <!-- Align image and text -->
+                        <!-- Profile Image -->
+                        <div class="me-3">
+                            <img src="{{ profile.profile_image.url }}" alt="User Image" class="img-fluid rounded-circle" style="width: 100px; height: 100px;">
+                        </div>
+                        <div>
+                            <h5 class="mb-0" style="font-family: 'Baguette Script', cursive;">Profile Details of {{ request.user.first_name }}</h5> <!-- Baguette Script for heading -->
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body p-4">
+                    <form>
+                        <fieldset>
+                            <div class="mb-3">
+                                <label for="name" class="form-label"><strong style="color: blueviolet;">Name:</strong></label>
+                                <input type="text" class="form-control" id="name" value="{{ logged_user.first_name }}" readonly>
+                            </div>
+                            <div class="mb-3">
+                                <label for="username" class="form-label"><strong style="color: blueviolet;">Username:</strong></label>
+                                <input type="text" class="form-control" id="username" value="{{ logged_user.username }}" readonly>
+                            </div>
+                            <div class="mb-3">
+                                <label for="phone" class="form-label"><strong style="color: blueviolet;">Phone Number:</strong></label>
+                                <input type="text" class="form-control" id="phone" value="{{ profile.phone }}" readonly>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label"><strong style="color: blueviolet;">Email:</strong></label>
+                                <input type="email" class="form-control" id="email" value="{{ logged_user.email }}" readonly>
+                            </div>
+                            <div class="mb-3">
+                                <label for="idProof" class="form-label"><strong style="color: blueviolet;">ID Proof:</strong></label>
+                                <a href="{{ profile.id_proof.url }}" target="_blank" class="form-control">{{ profile.id_proof.url }}</a>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+                <div class="text-center mb-3"> <!-- Center the Edit button -->
+                    <a href="{% url 'edit_profile' user.id %}" class="btn" style="background-color: #FFA500; color: white;">Edit</a>
+                </div>
+            </div> <!-- End of card -->
+        </div> <!-- End of column -->
+    </div> <!-- End of row -->
+</div> <!-- End of container -->
+{% endblock %}

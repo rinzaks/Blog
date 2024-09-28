@@ -1,0 +1,151 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" class="light-style layout-menu-fixed" dir="ltr" data-theme="theme-default" data-assets-path="{% static '' %}" data-template="vertical-menu-template-free">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+  <title>Dashboard - Analytics | Sneat - Bootstrap 5 HTML Admin Template - Pro</title>
+  <meta name="description" content="" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="{% static 'img/favicon/favicon.ico' %}" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet" />
+  
+  <!-- Core CSS -->
+  <link rel="stylesheet" href="{% static 'vendor/css/core.css' %}" class="template-customizer-core-css" />
+  <link rel="stylesheet" href="{% static 'vendor/css/theme-default.css' %}" class="template-customizer-theme-css" />
+  <link rel="stylesheet" href="{% static 'css/demo.css' %}" />
+
+  <style>
+    /* Set background color for the body */
+    body {
+      background-color: #cdc5c5d4; /* Fallback color */
+      background-image: url("{% static 'img/R.jpg' %}"); /* Background image */
+      background-size: cover; /* Cover the entire page */
+      background-position: center; /* Center the image */
+      background-repeat: no-repeat; /* Do not repeat the image */
+      color: white; /* Set default font color to white */
+      min-height: 100vh; /* Ensure the body is at least the height of the viewport */
+      display: flex; /* Use flexbox for layout */
+      flex-direction: column; /* Stack children vertically */
+    }
+
+    .layout-wrapper {
+      flex: 1; /* Allow the layout wrapper to take up available space */
+      display: flex;
+      flex-direction: column; /* Stack footer below the content */
+    }
+
+    footer {
+      margin-top: auto; /* Push footer to the bottom */
+    }
+
+    /* Navbar styles */
+    .navbar {
+      background-color: #343a40; /* Dark background for navbar */
+      display: flex; /* Use flexbox layout */
+      justify-content: space-between; /* Space between logo and menu */
+      align-items: center; /* Center items vertically */
+      padding: 10px 20px; /* Padding around navbar */
+      width: 100%; /* Full width */
+    }
+
+    .logo {
+      font-size: 24px; /* Logo font size */
+      color: white; /* Logo color */
+    }
+
+    .menu {
+      display: flex; /* Use flexbox for menu */
+      align-items: center; /* Center items vertically */
+    }
+
+    .menu a {
+      color: white; /* White text color for links */
+      margin: 0 15px; /* Space between links */
+      text-decoration: none; /* Remove underline from links */
+    }
+
+    .menu a:hover {
+      text-decoration: underline; /* Underline on hover */
+    }
+
+    .dropdown {
+      position: relative; /* Positioning for dropdown */
+    }
+
+    .dropdown-content {
+      display: none; /* Hide dropdown content */
+      position: absolute; /* Position it absolutely */
+      background-color: #f9f9f9; /* Light background */
+      min-width: 160px; /* Minimum width for dropdown */
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); /* Shadow for dropdown */
+      z-index: 1; /* Ensure it appears above other elements */
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block; /* Show dropdown on hover */
+    }
+
+    .dropdown-content a {
+      color: black; /* Black text for dropdown links */
+      padding: 12px 16px; /* Padding for dropdown links */
+      text-decoration: none; /* Remove underline */
+      display: block; /* Make dropdown links block elements */
+    }
+
+    .dropdown-content a:hover {
+      background-color: #f1f1f1; /* Light grey on hover */
+    }
+  </style>
+</head>
+
+<body>
+      {% block navbar %}
+      <nav class="navbar">
+        <div class="logo">SNEAT BLOGS</div>
+        <div class="menu">
+          <a href="{% url 'admin_home' %}">Home</a>
+          <a href="{% url 'user_list' %}">Users List</a>
+          <!-- Dropdown for Settings -->
+          <div class="dropdown">
+            <a href="#">Settings</a>
+            <div class="dropdown-content">
+              <a href="{% url 'edit_profile' user.id %}">Edit Profile</a>
+              <a href="{% url 'admin_resetpassword' %}">Forgot Password</a>
+            </div>
+          </div>
+          <a href="{% url 'admin_logout' %}">Logout</a>
+        </div>
+      </nav>
+      {% endblock %}
+
+      <!-- Blog Posts Section -->
+      {% block content %}
+      {% endblock %}
+      
+      <!-- Footer -->
+      <footer class="content-footer footer bg-footer-theme">
+        <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
+          <div class="mb-2 mb-md-0">
+            ©️ <script>document.write(new Date().getFullYear());</script>, made with ❤️ by
+          </div>
+        </div>
+      </footer>
+    <!-- / Content wrapper -->
+
+  <!-- Core JS -->
+  <script src="{% static 'vendor/libs/jquery/jquery.js' %}"></script>
+  <script src="{% static 'vendor/libs/popper/popper.js' %}"></script>
+  <script src="{% static 'vendor/js/bootstrap.js' %}"></script>
+  <script src="{% static 'vendor/libs/perfect-scrollbar/perfect-scrollbar.js' %}"></script>
+  <script src="{% static 'vendor/js/menu.js' %}"></script>
+  <script src="{% static 'vendor/libs/apex-charts/apexcharts.js' %}"></script>
+  <script src="{% static 'js/main.js' %}"></script>
+  <script src="{% static 'js/dashboards-analytics.js' %}"></script>
+</body>
+</html>
